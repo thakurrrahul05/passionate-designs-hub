@@ -14,13 +14,102 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      bookings: {
+        Row: {
+          budget_range: string | null
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          notes: string | null
+          phone: string
+          property_type: string
+          service: string
+          slot_date: string
+          slot_time: string
+          space_size: string | null
+          status: string
+        }
+        Insert: {
+          budget_range?: string | null
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          notes?: string | null
+          phone: string
+          property_type: string
+          service: string
+          slot_date: string
+          slot_time: string
+          space_size?: string | null
+          status?: string
+        }
+        Update: {
+          budget_range?: string | null
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          notes?: string | null
+          phone?: string
+          property_type?: string
+          service?: string
+          slot_date?: string
+          slot_time?: string
+          space_size?: string | null
+          status?: string
+        }
+        Relationships: []
+      }
+      leads: {
+        Row: {
+          budget_range: string | null
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          message: string | null
+          phone: string
+          property_type: string
+          space_size: string | null
+        }
+        Insert: {
+          budget_range?: string | null
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          message?: string | null
+          phone: string
+          property_type: string
+          space_size?: string | null
+        }
+        Update: {
+          budget_range?: string | null
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          message?: string | null
+          phone?: string
+          property_type?: string
+          space_size?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      booked_slots: {
+        Args: { _from: string; _to: string }
+        Returns: {
+          slot_date: string
+          slot_time: string
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
