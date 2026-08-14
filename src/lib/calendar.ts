@@ -4,13 +4,16 @@ function to24h(time: string) {
   const match = /^(\d{1,2}):(\d{2})\s?(AM|PM)$/i.exec(time.trim());
   if (!match) return { hour: 11, minute: 0 };
   let hour = Number(match[1]) % 12;
-  if (match[3].toUpperCase() === "PM") hour += 12;
+  if ((match[3] ?? "").toUpperCase() === "PM") hour += 12;
   return { hour, minute: Number(match[2]) };
 }
 
 /** Consultation start/end as UTC stamps (studio runs on IST, UTC+5:30). */
 export function slotToUtc(slotDate: string, slotTime: string) {
-  const [y, m, d] = slotDate.split("-").map(Number);
+  const parts = slotDate.split("-").map(Number);
+  const y = parts[0] ?? 1970;
+  const m = parts[1] ?? 1;
+  const d = parts[2] ?? 1;
   const { hour, minute } = to24h(slotTime);
   const start = new Date(Date.UTC(y, m - 1, d, hour, minute) - 5.5 * 60 * 60 * 1000);
   const end = new Date(start.getTime() + 45 * 60 * 1000);
