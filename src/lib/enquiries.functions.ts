@@ -64,13 +64,10 @@ export const createBooking = createServerFn({ method: "POST" })
     });
 
     if (error) {
-      if (error.code === "23505" || error.code === "23P01" || error.code === "23514" || error.code === "23000" || error.code === "23503" || error.code === "23502" || error.code === "23001" || error.code === "23514") {
-        console.error("booking insert failed", error.message);
-      }
+      console.error("booking insert failed", error.message);
       if (error.code === "23505" || error.message.includes("duplicate key")) {
         throw new Error("That slot was just taken. Please pick another time.");
       }
-      console.error("booking insert failed", error.message);
       throw new Error("We could not confirm that slot. Please try again.");
     }
 
